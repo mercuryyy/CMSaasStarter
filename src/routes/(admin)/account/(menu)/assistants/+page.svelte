@@ -122,7 +122,11 @@
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">Provider</label>
-                  <input class="w-full p-2 border rounded" bind:value={selectedAssistant.llm} />
+                  <select class="w-full p-2 border rounded" bind:value={selectedAssistant.llm}>
+                    <option value="OpenAI">OpenAI</option>
+                    <option value="Groq">Groq</option>
+                    <option value="Local">Local</option>
+                  </select>
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">Model</label>
