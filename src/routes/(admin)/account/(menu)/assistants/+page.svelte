@@ -112,7 +112,7 @@
     const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
     if (error) {
       console.error('Error creating assistant:', error);
-    } else {
+    } else if (createdAssistant) {
       assistants = [...assistants, { id: createdAssistant.id, assistant_name: createdAssistant.assistant_name }];
       selectAssistant(createdAssistant);
     }
