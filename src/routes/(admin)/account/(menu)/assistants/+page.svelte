@@ -306,18 +306,18 @@
   }
 
   .tab-content.hidden {
-    display: none.
+    display: none;
   }
 
   .tab.tab-active {
-    border-bottom: 2px solid currentColor.
+    border-bottom: 2px solid currentColor;
   }
 
   .bg-primary {
-    background-color: var(--primary).
+    background-color: var(--primary);
   }
 
   .text-white {
-    color: white.
+    color: white;
   }
 </style>
