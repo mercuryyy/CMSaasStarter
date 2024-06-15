@@ -78,19 +78,19 @@
       console.error('User profile ID is not available');
       return;
     }
-
+  
     if (!selectedAssistant) {
       console.error('Selected assistant is not properly initialized');
       return;
     }
-
+  
     if (!selectedAssistant.model) {
       console.error('Selected assistant model is not properly initialized');
       return;
     }
-
+  
     let currentAssistantId = selectedAssistant.id;
-
+  
     if (!currentAssistantId) {
       // New assistant creation
       const newAssistant = {
@@ -106,21 +106,23 @@
         app_number: selectedAssistant.app_number,
         user_id: data.profile.id
       };
-
-      const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).select('id').single();
+  
+      console.log('Creating new assistant with data:', newAssistant);
+  
+      const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
       if (error) {
         console.error('Error creating assistant:', error);
       } else {
         console.log('Assistant created successfully:', createdAssistant);
         currentAssistantId = createdAssistant.id;
-        assistants.push({ id: createdAssistant.id, assistant_name: selectedAssistant.assistant_name });
+        assistants.push({ id: createdAssistant.id, assistant_name: createdAssistant.assistant_name });
         await loadAssistantNames();
         await selectAssistant(currentAssistantId);
       }
     } else {
       // Existing assistant update
       console.log('Updating assistant with the following data:', selectedAssistant);
-
+  
       const { error } = await supabase
         .from('assistants')
         .update({
@@ -136,9 +138,11 @@
           app_number: selectedAssistant.app_number
         })
         .eq('id', currentAssistantId);
-
+  
       if (error) {
-        console.error('Error updating assistant:', error);
+        // console.error('Error updating assistant:', error);
+        console.error('Error creating assistant:', error);
+        alert('Error creating assistant: ' + JSON.stringify(error, null, 2));
       } else {
         await loadAssistantNames();
         await selectAssistant(currentAssistantId);
