@@ -113,7 +113,6 @@
       } else {
         console.log('Assistant created successfully:', createdAssistant);
         currentAssistantId = createdAssistant.id;
-        assistants.push(createdAssistant);
       }
     } else {
       // Existing assistant update
@@ -141,7 +140,7 @@
     }
 
     await loadAssistantNames();
-    await loadAssistantDetails(currentAssistantId);
+    await selectAssistant(currentAssistantId);
   }
 
   function createAssistant() {
