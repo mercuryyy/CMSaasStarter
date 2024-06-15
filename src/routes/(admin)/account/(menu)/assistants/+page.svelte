@@ -67,6 +67,11 @@
       return;
     }
 
+    if (!selectedAssistant || !selectedAssistant.llm) {
+      console.error('Selected assistant is not properly initialized');
+      return;
+    }
+
     if (!selectedAssistant.id) {
       // New assistant creation
       const newAssistant = {
