@@ -49,7 +49,7 @@
         app_number: selectedAssistant.app_number
       })
       .eq('id', selectedAssistant.id);
-    
+
     if (error) {
       console.error('Error updating assistant:', error);
     } else {
