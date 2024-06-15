@@ -6,18 +6,53 @@
   let adminSection: Writable<string> = getContext("adminSection");
   adminSection.set("assistants");
 
-  export let data;
-  let { assistants } = data;
-
-  console.log('Data received from server:', data);
-  console.log('Assistants:', assistants);
-
-  let selectedAssistant = assistants.length > 0 ? assistants[0] : null;
+  let assistants = [];
+  let selectedAssistant = null;
   let selectedTab = 'model';
 
+  export let data;
+  let { supabase } = data;
+
+  onMount(async () => {
+    const { data: assistantsData, error } = await supabase.from('assistants').select('*').eq('user_id', data.profile.id);
+    if (error) {
+      console.error('Error fetching assistants:', error);
+    } else {
+      assistants = assistantsData;
+      if (assistants.length > 0) {
+        selectedAssistant = assistants[0];
+      }
+    }
+  });
+
   function selectAssistant(assistant) {
-    selectedAssistant = assistant;
+    selectedAssistant = { ...assistant };
     selectedTab = 'model';
+  }
+
+  async function publishAssistant() {
+    const { error } = await supabase
+      .from('assistants')
+      .update({
+        assistant_name: selectedAssistant.assistant_name,
+        system_prompt: selectedAssistant.system_prompt,
+        first_message: selectedAssistant.first_message,
+        llm: selectedAssistant.llm,
+        stt: selectedAssistant.stt,
+        tts: selectedAssistant.tts,
+        name: selectedAssistant.name,
+        type: selectedAssistant.type,
+        model: selectedAssistant.model,
+        model_name: selectedAssistant.model_name,
+        app_number: selectedAssistant.app_number
+      })
+      .eq('id', selectedAssistant.id);
+    
+    if (error) {
+      console.error('Error updating assistant:', error);
+    } else {
+      console.log('Assistant updated successfully');
+    }
   }
 </script>
 
@@ -42,7 +77,7 @@
   <div class="flex-1 p-6">
     {#if selectedAssistant}
       <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold">{selectedAssistant.assistant_name}</h1>
+        <input class="text-2xl font-bold" bind:value={selectedAssistant.assistant_name} />
         <button class="btn btn-secondary">Talk with {selectedAssistant.assistant_name}</button>
       </div>
 
@@ -77,22 +112,22 @@
               <div class="bg-base-100 p-4 rounded shadow">
                 <div class="mb-4">
                   <label class="block font-bold">First Message</label>
-                  <p>{selectedAssistant.first_message}</p>
+                  <input class="w-full p-2 border rounded" bind:value={selectedAssistant.first_message} />
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">System Prompt</label>
-                  <p>{selectedAssistant.system_prompt}</p>
+                  <textarea class="w-full p-2 border rounded" bind:value={selectedAssistant.system_prompt}></textarea>
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">Provider</label>
-                  <p>{selectedAssistant.llm}</p>
+                  <input class="w-full p-2 border rounded" bind:value={selectedAssistant.llm} />
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">Model</label>
-                  <p>{selectedAssistant.model_name}</p>
+                  <input class="w-full p-2 border rounded" bind:value={selectedAssistant.model_name} />
                 </div>
               </div>
-              <button class="btn btn-primary mt-4">Publish</button>
+              <button class="btn btn-primary mt-4" on:click={publishAssistant}>Publish</button>
             </div>
           {/if}
 
