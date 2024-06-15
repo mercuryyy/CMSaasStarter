@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { supabase } from '../lib/supabaseClient';  // Adjust the path as necessary
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
 
