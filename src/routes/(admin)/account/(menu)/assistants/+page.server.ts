@@ -9,14 +9,17 @@ export const load = async ({ locals }) => {
   }
 
   console.log('Fetching assistants from database...');
-  const { data: assistants, error } = await supabase.from("assistants").select("*");
+  const { data: assistants, error, status, count } = await supabase.from("assistants").select("*");
 
   if (error) {
     console.error('Error fetching assistants:', error.message);
     return { assistants: [] };
   }
 
+  console.log('Response status:', status);
+  console.log('Count of records fetched:', count);
   console.log('Fetched assistants:', assistants);
+
   return { assistants: assistants || [] };
 };
 
