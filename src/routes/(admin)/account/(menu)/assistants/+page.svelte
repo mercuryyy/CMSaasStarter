@@ -30,7 +30,7 @@
     } else {
       assistants = assistantsData;
       if (assistants.length > 0) {
-        selectAssistant(assistants[0]);
+        await selectAssistant(assistants[0]);
       }
     }
   }
@@ -71,7 +71,7 @@
       return;
     }
 
-    if (!selectedAssistant) {
+    if (!selectedAssistant || !selectedAssistant.model) {
       console.error('Selected assistant is not properly initialized');
       return;
     }
@@ -99,6 +99,7 @@
         selectedAssistant = createdAssistant;
         updateModelOptions(createdAssistant.model);
         await loadAssistants();
+        selectAssistant(createdAssistant);
       }
     } else {
       // Existing assistant update
@@ -125,6 +126,7 @@
       } else {
         console.log('Assistant updated successfully', updatedData);
         await loadAssistants();
+        selectAssistant(updatedData);
       }
     }
   }
