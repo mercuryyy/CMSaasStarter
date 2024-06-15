@@ -107,14 +107,15 @@
         user_id: data.profile.id
       };
 
-      const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
+      const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).select('id').single();
       if (error) {
         console.error('Error creating assistant:', error);
       } else {
         console.log('Assistant created successfully:', createdAssistant);
         currentAssistantId = createdAssistant.id;
-        assistants.push({ id: createdAssistant.id, assistant_name: createdAssistant.assistant_name });
-        await selectAssistant(currentAssistantId); // Select the newly created assistant
+        assistants.push({ id: createdAssistant.id, assistant_name: selectedAssistant.assistant_name });
+        await loadAssistantNames();
+        await selectAssistant(currentAssistantId);
       }
     } else {
       // Existing assistant update
@@ -138,10 +139,11 @@
 
       if (error) {
         console.error('Error updating assistant:', error);
+      } else {
+        await loadAssistantNames();
+        await selectAssistant(currentAssistantId);
       }
     }
-
-    await loadAssistantNames();
   }
 
   function createAssistant() {
@@ -304,18 +306,18 @@
   }
 
   .tab-content.hidden {
-    display: none;
+    display: none.
   }
 
   .tab.tab-active {
-    border-bottom: 2px solid currentColor;
+    border-bottom: 2px solid currentColor.
   }
 
   .bg-primary {
-    background-color: var(--primary);
+    background-color: var(--primary).
   }
 
   .text-white {
-    color: white;
+    color: white.
   }
 </style>
