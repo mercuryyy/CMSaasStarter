@@ -8,12 +8,14 @@ export const load = async ({ locals }) => {
     throw redirect(303, "/login");
   }
 
+  console.log('Fetching assistants from database...');
   const { data: assistants, error } = await supabase.from("assistants").select("*");
   if (error) {
     console.error('Error fetching assistants:', error);
     return { assistants: [] };
   }
 
+  console.log('Fetched assistants:', assistants);
   return { assistants };
 };
 
