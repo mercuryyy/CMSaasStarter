@@ -1,44 +1,62 @@
-import { redirect, error } from "@sveltejs/kit"
-import {
-  getOrCreateCustomerId,
-  fetchSubscription,
-} from "../../subscription_helpers.server"
-import type { PageServerLoad } from "./$types"
+<script lang="ts">
+  import { getContext } from "svelte"
+  import type { Writable } from "svelte/store"
+  import SettingsModule from "./settings_module.svelte"
 
-export const load: PageServerLoad = async ({
-  locals: { safeGetSession, supabaseServiceRole },
-}) => {
-  const { session } = await safeGetSession()
-  if (!session) {
-    redirect(303, "/login")
-  }
+  let adminSection: Writable<string> = getContext("adminSection")
+  adminSection.set("settings")
 
-  const { error: idError, customerId } = await getOrCreateCustomerId({
-    supabaseServiceRole,
-    session,
-  })
-  if (idError || !customerId) {
-    error(500, {
-      message: "Unknown error. If issue persists, please contact us.",
-    })
-  }
+  export let data
+  let { session, profile } = data
+</script>
 
-  const {
-    primarySubscription,
-    hasEverHadSubscription,
-    error: fetchErr,
-  } = await fetchSubscription({
-    customerId,
-  })
-  if (fetchErr) {
-    error(500, {
-      message: "Unknown error. If issue persists, please contact us.",
-    })
-  }
+<svelte:head>
+  <title>Settings</title>
+</svelte:head>
 
-  return {
-    isActiveCustomer: !!primarySubscription,
-    hasEverHadSubscription,
-    currentPlanId: primarySubscription?.appSubscription?.id,
-  }
-}
+<h1 class="text-2xl font-bold mb-6">Settings</h1>
+
+<SettingsModule
+  title="Profile"
+  editable={false}
+  fields={[
+    { id: "fullName", label: "Name", initialValue: profile?.full_name ?? "" },
+    {
+      id: "companyName",
+      label: "Company Name",
+      initialValue: profile?.company_name ?? "",
+    },
+    {
+      id: "website",
+      label: "Company Website",
+      initialValue: profile?.website ?? "",
+    },
+  ]}
+  editButtonTitle="Edit Profile"
+  editLink="/account/settings/edit_profile"
+/>
+
+<SettingsModule
+  title="Email"
+  editable={false}
+  fields={[{ id: "email", initialValue: session?.user?.email || "" }]}
+  editButtonTitle="Change Email"
+  editLink="/account/settings/change_email"
+/>
+
+<SettingsModule
+  title="Password"
+  editable={false}
+  fields={[{ id: "password", initialValue: "••••••••••••••••" }]}
+  editButtonTitle="Change Password"
+  editLink="/account/settings/change_password"
+/>
+
+<SettingsModule
+  title="Danger Zone"
+  editable={false}
+  dangerous={true}
+  fields={[]}
+  editButtonTitle="Delete Account"
+  editLink="/account/settings/delete_account"
+/>
