@@ -175,9 +175,13 @@
     <button class="btn btn-primary mb-4 w-full" on:click={createAssistant}>+ Create Assistant</button>
     <nav class="space-y-2">
       {#each assistants as assistant (assistant.id)}
-      <button
-        on:click={() => selectAssistant(assistant.id)}
-        class="block py-2 px-4 rounded hover:bg-base-300 w-full text-left {selectedAssistant && selectedAssistant.id === assistant.id ? 'bg-primary text-white' : ''}">
+      <script>
+        function getButtonClass(assistantId) {
+          return `block py-2 px-4 rounded hover:bg-base-300 w-full text-left ${selectedAssistant && selectedAssistant.id === assistantId ? 'bg-primary text-white' : ''}`;
+        }
+      </script>
+      
+      <button on:click={() => selectAssistant(assistant.id)} class={getButtonClass(assistant.id)}>
         {assistant.assistant_name}
       </button>
       {/each}
