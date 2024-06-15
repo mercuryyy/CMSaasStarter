@@ -38,7 +38,7 @@
     } else {
       selectedAssistant = { ...assistantData };
       selectedTab = 'model';
-      updateModelOptions(selectedAssistant.llm);
+      updateModelOptions(selectedAssistant.model);
     }
   }
 
@@ -67,7 +67,7 @@
       return;
     }
 
-    if (!selectedAssistant || !selectedAssistant.llm) {
+    if (!selectedAssistant || !selectedAssistant.model) {
       console.error('Selected assistant is not properly initialized');
       return;
     }
@@ -78,12 +78,11 @@
         assistant_name: selectedAssistant.assistant_name,
         system_prompt: selectedAssistant.system_prompt,
         first_message: selectedAssistant.first_message,
-        llm: selectedAssistant.llm,
+        model: selectedAssistant.model,
         stt: selectedAssistant.stt,
         tts: selectedAssistant.tts,
         name: selectedAssistant.name,
         type: selectedAssistant.type,
-        model: selectedAssistant.model,
         model_name: selectedAssistant.model_name,
         app_number: selectedAssistant.app_number,
         user_id: data.profile.id
@@ -94,7 +93,7 @@
         console.error('Error creating assistant:', error);
       } else {
         selectedAssistant = createdAssistant;
-        updateModelOptions(createdAssistant.llm);
+        updateModelOptions(createdAssistant.model);
         await refreshAssistants();
       }
     } else {
@@ -107,12 +106,11 @@
           assistant_name: selectedAssistant.assistant_name,
           system_prompt: selectedAssistant.system_prompt,
           first_message: selectedAssistant.first_message,
-          llm: selectedAssistant.llm,
+          model: selectedAssistant.model,
           stt: selectedAssistant.stt,
           tts: selectedAssistant.tts,
           name: selectedAssistant.name,
           type: selectedAssistant.type,
-          model: selectedAssistant.model,
           model_name: selectedAssistant.model_name,
           app_number: selectedAssistant.app_number
         })
@@ -141,18 +139,17 @@
       assistant_name: '',
       system_prompt: '',
       first_message: '',
-      llm: 'OpenAI',
+      model: 'OpenAI',
       stt: '',
       tts: '',
       name: '',
       type: '',
-      model: '',
       model_name: 'gpt-4o',
       app_number: '',
       user_id: data.profile.id
     };
     selectedTab = 'model';
-    updateModelOptions(selectedAssistant.llm);
+    updateModelOptions(selectedAssistant.model);
   }
 </script>
 
@@ -220,7 +217,7 @@
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">Provider</label>
-                  <select class="w-full p-2 border rounded" bind:value={selectedAssistant.llm} on:change={() => updateModelOptions(selectedAssistant.llm)}>
+                  <select class="w-full p-2 border rounded" bind:value={selectedAssistant.model} on:change={() => updateModelOptions(selectedAssistant.model)}>
                     <option value="OpenAI">OpenAI</option>
                     <option value="Groq">Groq</option>
                     <option value="Local">Local</option>
