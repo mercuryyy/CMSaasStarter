@@ -47,7 +47,6 @@
   }
 
   function updateModelOptions(provider) {
-    console.log('Updating model options for provider:', provider);
     switch(provider) {
       case 'OpenAI':
         modelOptions = ["gpt-4o", "gpt-3.5"];
@@ -67,8 +66,6 @@
   }
 
   async function publishAssistant() {
-    console.log('Publishing assistant:', selectedAssistant);
-
     if (!data.profile || !data.profile.id) {
       console.error('User profile ID is not available');
       return;
@@ -105,8 +102,6 @@
         console.error('Error creating assistant:', error);
       } else {
         console.log('Assistant created successfully:', createdAssistant);
-        selectedAssistant = createdAssistant;
-        updateModelOptions(createdAssistant.model);
         await loadAssistants();
         await selectAssistant(createdAssistant);
       }
@@ -168,7 +163,7 @@
   <div class="w-1/4 bg-base-200 p-4">
     <button class="btn btn-primary mb-4 w-full" on:click={createAssistant}>+ Create Assistant</button>
     <nav class="space-y-2">
-      {#each assistants as assistant}
+      {#each assistants as assistant (assistant.id)}
         <button on:click={() => selectAssistant(assistant)} class="block py-2 px-4 rounded hover:bg-base-300 w-full text-left {selectedAssistant && selectedAssistant.id === assistant.id ? 'bg-primary text-white' : ''}">
           {assistant.assistant_name}
         </button>
