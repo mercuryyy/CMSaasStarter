@@ -30,7 +30,7 @@
     } else {
       assistants = assistantsData || [];
       if (assistants.length > 0) {
-        await selectAssistant(assistants[0]);
+        await selectAssistant(assistants[0].id);
       }
     }
   }
@@ -50,8 +50,8 @@
     }
   }
 
-  async function selectAssistant(assistant) {
-    await loadAssistantDetails(assistant.id);
+  async function selectAssistant(assistantId) {
+    await loadAssistantDetails(assistantId);
   }
 
   function updateModelOptions(provider) {
@@ -111,7 +111,9 @@
       if (error) {
         console.error('Error creating assistant:', error);
       } else {
+        console.log('Assistant created successfully:', createdAssistant);
         currentAssistantId = createdAssistant.id;
+        assistants.push(createdAssistant);
       }
     } else {
       // Existing assistant update
@@ -171,7 +173,7 @@
     <button class="btn btn-primary mb-4 w-full" on:click={createAssistant}>+ Create Assistant</button>
     <nav class="space-y-2">
       {#each assistants as assistant (assistant.id)}
-        <button on:click={() => selectAssistant(assistant)} class="block py-2 px-4 rounded hover:bg-base-300 w-full text-left {selectedAssistant && selectedAssistant.id === assistant.id ? 'bg-primary text-white' : ''}">
+        <button on:click={() => selectAssistant(assistant.id)} class="block py-2 px-4 rounded hover:bg-base-300 w-full text-left {selectedAssistant && selectedAssistant.id === assistant.id ? 'bg-primary text-white' : ''}">
           {assistant.assistant_name}
         </button>
       {/each}
