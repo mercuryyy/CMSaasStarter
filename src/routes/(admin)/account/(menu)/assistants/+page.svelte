@@ -114,9 +114,7 @@
       console.error('Error creating assistant:', error);
     } else {
       assistants = [...assistants, { id: createdAssistant.id, assistant_name: createdAssistant.assistant_name }];
-      selectedAssistant = createdAssistant;
-      selectedTab = 'model';
-      updateModelOptions(createdAssistant.llm);
+      selectAssistant(createdAssistant);
     }
   }
 </script>
@@ -132,7 +130,7 @@
     <nav class="space-y-2">
       {#each assistants as assistant}
         <button on:click={() => selectAssistant(assistant)} class="block py-2 px-4 rounded hover:bg-base-300 w-full text-left {selectedAssistant && selectedAssistant.id === assistant.id ? 'bg-primary text-white' : ''}">
-          <input class="w-full bg-transparent text-left" bind:value={assistant.assistant_name} />
+          {assistant.assistant_name}
         </button>
       {/each}
     </nav>
@@ -275,12 +273,5 @@
 
   .text-white {
     color: white;
-  }
-
-  .input-assistant-name {
-    background: transparent;
-    border: none;
-    outline: none;
-    width: 100%;
   }
 </style>
