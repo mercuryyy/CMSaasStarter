@@ -28,7 +28,7 @@
     if (error) {
       console.error('Error fetching assistants:', error);
     } else {
-      assistants = assistantsData;
+      assistants = assistantsData || [];
       if (assistants.length > 0) {
         await selectAssistant(assistants[0]);
       }
