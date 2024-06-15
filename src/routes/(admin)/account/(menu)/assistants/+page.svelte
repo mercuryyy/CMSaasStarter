@@ -36,6 +36,10 @@
   }
 
   async function selectAssistant(assistant) {
+    if (!assistant || !assistant.id) {
+      console.error('Invalid assistant data:', assistant);
+      return;
+    }
     const { data: assistantData, error } = await supabase.from('assistants').select('*').eq('id', assistant.id).single();
     if (error) {
       console.error('Error fetching assistant details:', error);
@@ -81,6 +85,8 @@
       return;
     }
 
+    let currentAssistant = null;
+
     if (!selectedAssistant.id) {
       // New assistant creation
       const newAssistant = {
@@ -102,8 +108,8 @@
         console.error('Error creating assistant:', error);
       } else {
         console.log('Assistant created successfully:', createdAssistant);
-        await loadAssistants();
-        await selectAssistant(createdAssistant);
+        currentAssistant = createdAssistant;
+        assistants.push(createdAssistant);
       }
     } else {
       // Existing assistant update
@@ -123,15 +129,23 @@
           model_name: selectedAssistant.model_name,
           app_number: selectedAssistant.app_number
         })
-        .eq('id', selectedAssistant.id);
+        .eq('id', selectedAssistant.id)
+        .single();
 
       if (error) {
         console.error('Error updating assistant:', error);
       } else {
         console.log('Assistant updated successfully:', updatedData);
-        await loadAssistants();
-        await selectAssistant(updatedData);
+        currentAssistant = updatedData;
+        const index = assistants.findIndex(assistant => assistant.id === updatedData.id);
+        if (index !== -1) {
+          assistants[index] = updatedData;
+        }
       }
+    }
+
+    if (currentAssistant) {
+      await selectAssistant(currentAssistant);
     }
   }
 
