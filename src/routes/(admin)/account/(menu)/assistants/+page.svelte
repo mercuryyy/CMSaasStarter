@@ -36,10 +36,6 @@
   }
 
   async function selectAssistant(assistant) {
-    if (!assistant || !assistant.id) {
-      console.error('Invalid assistant data:', assistant);
-      return;
-    }
     const { data: assistantData, error } = await supabase.from('assistants').select('*').eq('id', assistant.id).single();
     if (error) {
       console.error('Error fetching assistant details:', error);
