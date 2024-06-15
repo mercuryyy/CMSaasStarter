@@ -62,13 +62,13 @@
   }
 
   async function publishAssistant() {
+    if (!data.profile || !data.profile.id) {
+      console.error('User profile ID is not available');
+      return;
+    }
+
     if (!selectedAssistant.id) {
       // New assistant creation
-      if (!data.profile || !data.profile.id) {
-        console.error('User profile ID is not available');
-        return;
-      }
-
       const newAssistant = {
         assistant_name: selectedAssistant.assistant_name,
         system_prompt: selectedAssistant.system_prompt,
@@ -88,9 +88,9 @@
       if (error) {
         console.error('Error creating assistant:', error);
       } else {
-        assistants = [...assistants, { id: createdAssistant.id, assistant_name: createdAssistant.assistant_name }];
         selectedAssistant = createdAssistant;
         updateModelOptions(createdAssistant.llm);
+        await refreshAssistants();
       }
     } else {
       // Existing assistant update
@@ -117,7 +117,17 @@
         console.error('Error updating assistant:', error);
       } else {
         console.log('Assistant updated successfully', updatedData);
+        await refreshAssistants();
       }
+    }
+  }
+
+  async function refreshAssistants() {
+    const { data: assistantsData, error } = await supabase.from('assistants').select('id, assistant_name').eq('user_id', data.profile.id);
+    if (error) {
+      console.error('Error fetching assistants:', error);
+    } else {
+      assistants = assistantsData;
     }
   }
 
