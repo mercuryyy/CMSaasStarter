@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
+  import { ThemeSupa } from "@supabase/auth-ui-shared"
   import { createClient, type Provider } from "@supabase/supabase-js";
 
   // Initialize Supabase client (this assumes you have the URL and key stored in environment variables or a global config)
