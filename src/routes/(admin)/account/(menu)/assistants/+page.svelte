@@ -113,6 +113,7 @@
       } else {
         console.log('Assistant created successfully:', createdAssistant);
         currentAssistantId = createdAssistant.id;
+        assistants.push({ id: createdAssistant.id, assistant_name: createdAssistant.assistant_name });
       }
     } else {
       // Existing assistant update
