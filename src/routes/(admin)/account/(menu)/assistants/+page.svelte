@@ -20,6 +20,10 @@
       return;
     }
 
+    await loadAssistants();
+  });
+
+  async function loadAssistants() {
     const { data: assistantsData, error } = await supabase.from('assistants').select('id, assistant_name').eq('user_id', data.profile.id);
     if (error) {
       console.error('Error fetching assistants:', error);
@@ -29,7 +33,7 @@
         selectAssistant(assistants[0]);
       }
     }
-  });
+  }
 
   async function selectAssistant(assistant) {
     const { data: assistantData, error } = await supabase.from('assistants').select('*').eq('id', assistant.id).single();
@@ -67,7 +71,7 @@
       return;
     }
 
-    if (!selectedAssistant || !selectedAssistant.model) {
+    if (!selectedAssistant) {
       console.error('Selected assistant is not properly initialized');
       return;
     }
@@ -94,7 +98,7 @@
       } else {
         selectedAssistant = createdAssistant;
         updateModelOptions(createdAssistant.model);
-        await refreshAssistants();
+        await loadAssistants();
       }
     } else {
       // Existing assistant update
@@ -120,17 +124,8 @@
         console.error('Error updating assistant:', error);
       } else {
         console.log('Assistant updated successfully', updatedData);
-        await refreshAssistants();
+        await loadAssistants();
       }
-    }
-  }
-
-  async function refreshAssistants() {
-    const { data: assistantsData, error } = await supabase.from('assistants').select('id, assistant_name').eq('user_id', data.profile.id);
-    if (error) {
-      console.error('Error fetching assistants:', error);
-    } else {
-      assistants = assistantsData;
     }
   }
 
