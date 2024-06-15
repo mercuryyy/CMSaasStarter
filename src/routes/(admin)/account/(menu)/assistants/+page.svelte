@@ -3,7 +3,7 @@
   import type { Writable } from "svelte/store"
 
   let adminSection: Writable<string> = getContext("adminSection")
-  adminSection.set("home")
+  adminSection.set("assistants")
 </script>
 
 <svelte:head>
