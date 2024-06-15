@@ -74,59 +74,26 @@
   }
 
   async function publishAssistant() {
-  if (!data.profile || !data.profile.id) {
-    console.error('User profile ID is not available');
-    return;
-  }
-
-  if (!selectedAssistant) {
-    console.error('Selected assistant is not properly initialized');
-    return;
-  }
-
-  if (!selectedAssistant.model) {
-    console.error('Selected assistant model is not properly initialized');
-    return;
-  }
-
-  let currentAssistantId = selectedAssistant.id;
-
-  if (!currentAssistantId) {
-    // New assistant creation
-    const newAssistant = {
-      assistant_name: selectedAssistant.assistant_name,
-      system_prompt: selectedAssistant.system_prompt,
-      first_message: selectedAssistant.first_message,
-      model: selectedAssistant.model,
-      stt: selectedAssistant.stt,
-      tts: selectedAssistant.tts,
-      name: selectedAssistant.name,
-      type: selectedAssistant.type,
-      model_name: selectedAssistant.model_name,
-      app_number: selectedAssistant.app_number,
-      user_id: data.profile.id
-    };
-
-    const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
-    if (error) {
-      console.error('Error creating assistant:', error);
-    } else {
-      console.log('Assistant created successfully:', createdAssistant);
-      currentAssistantId = createdAssistant.id;
-
-      // Update the selectedAssistant with the new ID
-      selectedAssistant.id = createdAssistant.id;
-
-      // Add the new assistant to the assistants array
-      assistants.push({ id: createdAssistant.id, assistant_name: createdAssistant.assistant_name });
+    if (!data.profile || !data.profile.id) {
+      console.error('User profile ID is not available');
+      return;
     }
-  } else {
-    // Existing assistant update
-    console.log('Updating assistant with the following data:', selectedAssistant);
 
-    const { error } = await supabase
-      .from('assistants')
-      .update({
+    if (!selectedAssistant) {
+      console.error('Selected assistant is not properly initialized');
+      return;
+    }
+
+    if (!selectedAssistant.model) {
+      console.error('Selected assistant model is not properly initialized');
+      return;
+    }
+
+    let currentAssistantId = selectedAssistant.id;
+
+    if (!currentAssistantId) {
+      // New assistant creation
+      const newAssistant = {
         assistant_name: selectedAssistant.assistant_name,
         system_prompt: selectedAssistant.system_prompt,
         first_message: selectedAssistant.first_message,
@@ -136,22 +103,49 @@
         name: selectedAssistant.name,
         type: selectedAssistant.type,
         model_name: selectedAssistant.model_name,
-        app_number: selectedAssistant.app_number
-      })
-      .eq('id', currentAssistantId);
+        app_number: selectedAssistant.app_number,
+        user_id: data.profile.id
+      };
+
+      const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
+      if (error) {
+        console.error('Error creating assistant:', error);
+      } else {
+        console.log('Assistant created successfully:', createdAssistant);
+        currentAssistantId = createdAssistant.id;
+        assistants.push({ id: createdAssistant.id, assistant_name: createdAssistant.assistant_name });
+        await selectAssistant(currentAssistantId); // Select the newly created assistant
+      }
+    } else {
+      // Existing assistant update
+      console.log('Updating assistant with the following data:', selectedAssistant);
+
+      const { error } = await supabase
+        .from('assistants')
+        .update({
+          assistant_name: selectedAssistant.assistant_name,
+          system_prompt: selectedAssistant.system_prompt,
+          first_message: selectedAssistant.first_message,
+          model: selectedAssistant.model,
+          stt: selectedAssistant.stt,
+          tts: selectedAssistant.tts,
+          name: selectedAssistant.name,
+          type: selectedAssistant.type,
+          model_name: selectedAssistant.model_name,
+          app_number: selectedAssistant.app_number
+        })
+        .eq('id', currentAssistantId);
+
       if (error) {
         console.error('Error updating assistant:', error);
       }
     }
 
     await loadAssistantNames();
-    await selectAssistant(currentAssistantId);
   }
 
   function createAssistant() {
-    const tempId = Date.now(); // Use a timestamp as a temporary ID
     selectedAssistant = {
-      id: tempId, // Add a temporary ID
       assistant_name: '',
       system_prompt: '',
       first_message: '',
@@ -167,7 +161,6 @@
     selectedTab = 'model';
     updateModelOptions(selectedAssistant.model);
   }
-
 </script>
 
 <svelte:head>
