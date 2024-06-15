@@ -109,7 +109,7 @@
       } else {
         console.log('Assistant created successfully:', createdAssistant);
         currentAssistant = createdAssistant;
-        assistants.push(createdAssistant);
+        assistants = [...assistants, createdAssistant];
       }
     } else {
       // Existing assistant update
