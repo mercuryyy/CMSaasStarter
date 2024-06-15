@@ -6,28 +6,11 @@
   let adminSection: Writable<string> = getContext("adminSection");
   adminSection.set("assistants");
 
-  let assistants = [];
-  let selectedAssistant = null;
-  let selectedTab = 'model';
-
   export let data;
-  let { supabase } = data;
+  let { assistants } = data;
 
-  onMount(async () => {
-    console.log("Fetching assistants...");
-    console.log("Supabase client:", supabase);
-
-    const { data: assistantsData, error } = await supabase.from('assistants').select('*');
-    if (error) {
-      console.error('Error fetching assistants:', error);
-    } else {
-      console.log('Fetched assistants:', assistantsData);
-      assistants = assistantsData;
-      if (assistants.length > 0) {
-        selectedAssistant = assistants[0];
-      }
-    }
-  });
+  let selectedAssistant = assistants.length > 0 ? assistants[0] : null;
+  let selectedTab = 'model';
 
   function selectAssistant(assistant) {
     selectedAssistant = assistant;
