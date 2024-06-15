@@ -9,6 +9,7 @@
   let assistants = [];
   let selectedAssistant = null;
   let selectedTab = 'model';
+  let modelOptions = [];
 
   export let data;
   let { supabase } = data;
@@ -21,6 +22,7 @@
       assistants = assistantsData;
       if (assistants.length > 0) {
         selectedAssistant = assistants[0];
+        updateModelOptions(selectedAssistant.llm);
       }
     }
   });
@@ -28,6 +30,24 @@
   function selectAssistant(assistant) {
     selectedAssistant = { ...assistant };
     selectedTab = 'model';
+    updateModelOptions(selectedAssistant.llm);
+  }
+
+  function updateModelOptions(provider) {
+    switch(provider) {
+      case 'OpenAI':
+        modelOptions = ["gpt-4o", "gpt-3.5"];
+        break;
+      case 'Groq':
+        modelOptions = ["llama3-70b-8192", "llama3-8b-8192", "mixtral-8x7b-32768"];
+        break;
+      case 'Local':
+        modelOptions = ["unsloth/llama-3-8b-Instruct"];
+        break;
+      default:
+        modelOptions = [];
+    }
+    selectedAssistant.model_name = modelOptions[0];
   }
 
   async function publishAssistant() {
@@ -122,7 +142,7 @@
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">Provider</label>
-                  <select class="w-full p-2 border rounded" bind:value={selectedAssistant.llm}>
+                  <select class="w-full p-2 border rounded" bind:value={selectedAssistant.llm} on:change={() => updateModelOptions(selectedAssistant.llm)}>
                     <option value="OpenAI">OpenAI</option>
                     <option value="Groq">Groq</option>
                     <option value="Local">Local</option>
@@ -130,7 +150,11 @@
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold">Model</label>
-                  <input class="w-full p-2 border rounded" bind:value={selectedAssistant.model_name} />
+                  <select class="w-full p-2 border rounded" bind:value={selectedAssistant.model_name}>
+                    {#each modelOptions as option}
+                      <option value={option}>{option}</option>
+                    {/each}
+                  </select>
                 </div>
               </div>
               <button class="btn btn-primary mt-4" on:click={publishAssistant}>Publish</button>
