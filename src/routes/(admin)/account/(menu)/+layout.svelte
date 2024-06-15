@@ -107,7 +107,7 @@
       <li>
         <a
           href="/account/assistants"
-          class={adminSection === "billing" ? "active" : ""}
+          class={adminSection === "assistants" ? "active" : ""}
           on:click={closeDrawer}
         >
           <svg
