@@ -28,7 +28,7 @@
     if (error) {
       console.error('Error fetching assistants:', error);
     } else {
-      assistants = assistantsData;
+      assistants = assistantsData || [];
       if (assistants.length > 0) {
         await selectAssistant(assistants[0]);
       }
@@ -87,37 +87,10 @@
 
     let currentAssistant = null;
 
-    if (!selectedAssistant.id) {
-      // New assistant creation
-      const newAssistant = {
-        assistant_name: selectedAssistant.assistant_name,
-        system_prompt: selectedAssistant.system_prompt,
-        first_message: selectedAssistant.first_message,
-        model: selectedAssistant.model,
-        stt: selectedAssistant.stt,
-        tts: selectedAssistant.tts,
-        name: selectedAssistant.name,
-        type: selectedAssistant.type,
-        model_name: selectedAssistant.model_name,
-        app_number: selectedAssistant.app_number,
-        user_id: data.profile.id
-      };
-
-      const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
-      if (error) {
-        console.error('Error creating assistant:', error);
-      } else {
-        console.log('Assistant created successfully:', createdAssistant);
-        currentAssistant = createdAssistant;
-        assistants = [...assistants, createdAssistant];
-      }
-    } else {
-      // Existing assistant update
-      console.log('Updating assistant with the following data:', selectedAssistant);
-
-      const { data: updatedData, error } = await supabase
-        .from('assistants')
-        .update({
+    try {
+      if (!selectedAssistant.id) {
+        // New assistant creation
+        const newAssistant = {
           assistant_name: selectedAssistant.assistant_name,
           system_prompt: selectedAssistant.system_prompt,
           first_message: selectedAssistant.first_message,
@@ -127,14 +100,41 @@
           name: selectedAssistant.name,
           type: selectedAssistant.type,
           model_name: selectedAssistant.model_name,
-          app_number: selectedAssistant.app_number
-        })
-        .eq('id', selectedAssistant.id)
-        .single();
+          app_number: selectedAssistant.app_number,
+          user_id: data.profile.id
+        };
 
-      if (error) {
-        console.error('Error updating assistant:', error);
+        const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
+        if (error) {
+          throw error;
+        }
+        console.log('Assistant created successfully:', createdAssistant);
+        currentAssistant = createdAssistant;
+        assistants = [...assistants, createdAssistant];
       } else {
+        // Existing assistant update
+        console.log('Updating assistant with the following data:', selectedAssistant);
+
+        const { data: updatedData, error } = await supabase
+          .from('assistants')
+          .update({
+            assistant_name: selectedAssistant.assistant_name,
+            system_prompt: selectedAssistant.system_prompt,
+            first_message: selectedAssistant.first_message,
+            model: selectedAssistant.model,
+            stt: selectedAssistant.stt,
+            tts: selectedAssistant.tts,
+            name: selectedAssistant.name,
+            type: selectedAssistant.type,
+            model_name: selectedAssistant.model_name,
+            app_number: selectedAssistant.app_number
+          })
+          .eq('id', selectedAssistant.id)
+          .single();
+
+        if (error) {
+          throw error;
+        }
         console.log('Assistant updated successfully:', updatedData);
         currentAssistant = updatedData;
         const index = assistants.findIndex(assistant => assistant.id === updatedData.id);
@@ -142,10 +142,12 @@
           assistants[index] = updatedData;
         }
       }
-    }
 
-    if (currentAssistant) {
-      await selectAssistant(currentAssistant);
+      if (currentAssistant) {
+        selectedAssistant = { ...currentAssistant };
+      }
+    } catch (error) {
+      console.error('Error during assistant creation/update:', error);
     }
   }
 
