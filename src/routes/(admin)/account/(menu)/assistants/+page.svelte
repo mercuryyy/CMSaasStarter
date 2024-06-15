@@ -15,22 +15,26 @@
   let { supabase } = data;
 
   onMount(async () => {
-    const { data: assistantsData, error } = await supabase.from('assistants').select('*').eq('user_id', data.profile.id);
+    const { data: assistantsData, error } = await supabase.from('assistants').select('id, assistant_name').eq('user_id', data.profile.id);
     if (error) {
       console.error('Error fetching assistants:', error);
     } else {
       assistants = assistantsData;
       if (assistants.length > 0) {
-        selectedAssistant = assistants[0];
-        updateModelOptions(selectedAssistant.llm);
+        selectAssistant(assistants[0]);
       }
     }
   });
 
-  function selectAssistant(assistant) {
-    selectedAssistant = { ...assistant };
-    selectedTab = 'model';
-    updateModelOptions(selectedAssistant.llm);
+  async function selectAssistant(assistant) {
+    const { data: assistantData, error } = await supabase.from('assistants').select('*').eq('id', assistant.id).single();
+    if (error) {
+      console.error('Error fetching assistant details:', error);
+    } else {
+      selectedAssistant = { ...assistantData };
+      selectedTab = 'model';
+      updateModelOptions(selectedAssistant.llm);
+    }
   }
 
   function updateModelOptions(provider) {
@@ -76,6 +80,31 @@
       console.log('Assistant updated successfully', updatedData);
     }
   }
+
+  async function createAssistant() {
+    const newAssistant = {
+      assistant_name: 'New Assistant',
+      system_prompt: '',
+      first_message: '',
+      llm: 'OpenAI',
+      stt: '',
+      tts: '',
+      name: '',
+      type: '',
+      model: '',
+      model_name: 'gpt-4o',
+      app_number: '',
+      user_id: data.profile.id
+    };
+
+    const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
+    if (error) {
+      console.error('Error creating assistant:', error);
+    } else {
+      assistants = [...assistants, { id: createdAssistant.id, assistant_name: createdAssistant.assistant_name }];
+      selectAssistant(createdAssistant);
+    }
+  }
 </script>
 
 <svelte:head>
@@ -85,10 +114,10 @@
 <div class="flex h-screen">
   <!-- Sidebar -->
   <div class="w-1/4 bg-base-200 p-4">
-    <button class="btn btn-primary mb-4 w-full">+ Create Assistant</button>
+    <button class="btn btn-primary mb-4 w-full" on:click={createAssistant}>+ Create Assistant</button>
     <nav class="space-y-2">
       {#each assistants as assistant}
-        <button on:click={() => selectAssistant(assistant)} class="block py-2 px-4 rounded hover:bg-base-300 w-full text-left">
+        <button on:click={() => selectAssistant(assistant)} class="block py-2 px-4 rounded hover:bg-base-300 w-full text-left {selectedAssistant && selectedAssistant.id === assistant.id ? 'bg-primary text-white' : ''}">
           {assistant.assistant_name}
         </button>
       {/each}
@@ -224,5 +253,13 @@
 
   .tab.tab-active {
     border-bottom: 2px solid currentColor;
+  }
+
+  .bg-primary {
+    background-color: var(--primary);
+  }
+
+  .text-white {
+    color: white;
   }
 </style>
