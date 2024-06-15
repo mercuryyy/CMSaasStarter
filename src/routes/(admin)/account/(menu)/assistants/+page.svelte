@@ -10,7 +10,6 @@
   let selectedAssistant = null;
   let selectedTab = 'model';
 
-  // Assuming the Supabase client is available in the page's data
   export let data;
   let { supabase } = data;
 
