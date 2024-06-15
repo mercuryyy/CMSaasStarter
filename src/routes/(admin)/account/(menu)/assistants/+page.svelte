@@ -2,7 +2,6 @@
   import { onMount } from 'svelte';
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
-  import { supabase } from '../lib/supabaseClient';  // Adjust the path as necessary
 
   let adminSection: Writable<string> = getContext("adminSection");
   adminSection.set("assistants");
@@ -10,6 +9,10 @@
   let assistants = [];
   let selectedAssistant = null;
   let selectedTab = 'model';
+
+  // Assuming the Supabase client is available in the page's data
+  export let data;
+  let { supabase } = data;
 
   onMount(async () => {
     const { data, error } = await supabase.from('assistants').select('*');
