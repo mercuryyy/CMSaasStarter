@@ -31,7 +31,9 @@
   }
 
   async function publishAssistant() {
-    const { error } = await supabase
+    console.log('Publishing assistant with the following data:', selectedAssistant);
+
+    const { data: updatedData, error } = await supabase
       .from('assistants')
       .update({
         assistant_name: selectedAssistant.assistant_name,
@@ -51,7 +53,7 @@
     if (error) {
       console.error('Error updating assistant:', error);
     } else {
-      console.log('Assistant updated successfully');
+      console.log('Assistant updated successfully', updatedData);
     }
   }
 </script>
