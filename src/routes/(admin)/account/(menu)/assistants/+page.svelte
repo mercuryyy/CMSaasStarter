@@ -62,11 +62,14 @@
   }
 
   async function publishAssistant() {
-    console.log('Publishing assistant with the following data:', selectedAssistant);
+    if (!selectedAssistant.id) {
+      // New assistant creation
+      if (!data.profile || !data.profile.id) {
+        console.error('User profile ID is not available');
+        return;
+      }
 
-    const { data: updatedData, error } = await supabase
-      .from('assistants')
-      .update({
+      const newAssistant = {
         assistant_name: selectedAssistant.assistant_name,
         system_prompt: selectedAssistant.system_prompt,
         first_message: selectedAssistant.first_message,
@@ -77,25 +80,50 @@
         type: selectedAssistant.type,
         model: selectedAssistant.model,
         model_name: selectedAssistant.model_name,
-        app_number: selectedAssistant.app_number
-      })
-      .eq('id', selectedAssistant.id);
+        app_number: selectedAssistant.app_number,
+        user_id: data.profile.id
+      };
 
-    if (error) {
-      console.error('Error updating assistant:', error);
+      const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
+      if (error) {
+        console.error('Error creating assistant:', error);
+      } else {
+        assistants = [...assistants, { id: createdAssistant.id, assistant_name: createdAssistant.assistant_name }];
+        selectedAssistant = createdAssistant;
+        updateModelOptions(createdAssistant.llm);
+      }
     } else {
-      console.log('Assistant updated successfully', updatedData);
+      // Existing assistant update
+      console.log('Publishing assistant with the following data:', selectedAssistant);
+
+      const { data: updatedData, error } = await supabase
+        .from('assistants')
+        .update({
+          assistant_name: selectedAssistant.assistant_name,
+          system_prompt: selectedAssistant.system_prompt,
+          first_message: selectedAssistant.first_message,
+          llm: selectedAssistant.llm,
+          stt: selectedAssistant.stt,
+          tts: selectedAssistant.tts,
+          name: selectedAssistant.name,
+          type: selectedAssistant.type,
+          model: selectedAssistant.model,
+          model_name: selectedAssistant.model_name,
+          app_number: selectedAssistant.app_number
+        })
+        .eq('id', selectedAssistant.id);
+
+      if (error) {
+        console.error('Error updating assistant:', error);
+      } else {
+        console.log('Assistant updated successfully', updatedData);
+      }
     }
   }
 
-  async function createAssistant() {
-    if (!data.profile || !data.profile.id) {
-      console.error('User profile ID is not available');
-      return;
-    }
-
-    const newAssistant = {
-      assistant_name: 'New Assistant',
+  function createAssistant() {
+    selectedAssistant = {
+      assistant_name: '',
       system_prompt: '',
       first_message: '',
       llm: 'OpenAI',
@@ -108,14 +136,8 @@
       app_number: '',
       user_id: data.profile.id
     };
-
-    const { data: createdAssistant, error } = await supabase.from('assistants').insert([newAssistant]).single();
-    if (error) {
-      console.error('Error creating assistant:', error);
-    } else if (createdAssistant) {
-      assistants = [...assistants, { id: createdAssistant.id, assistant_name: createdAssistant.assistant_name }];
-      selectAssistant(createdAssistant);
-    }
+    selectedTab = 'model';
+    updateModelOptions(selectedAssistant.llm);
   }
 </script>
 
