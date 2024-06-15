@@ -14,10 +14,14 @@
   let { supabase } = data;
 
   onMount(async () => {
+    console.log("Fetching assistants...");
+    console.log("Supabase client:", supabase);
+
     const { data: assistantsData, error } = await supabase.from('assistants').select('*');
     if (error) {
       console.error('Error fetching assistants:', error);
     } else {
+      console.log('Fetched assistants:', assistantsData);
       assistants = assistantsData;
       if (assistants.length > 0) {
         selectedAssistant = assistants[0];
