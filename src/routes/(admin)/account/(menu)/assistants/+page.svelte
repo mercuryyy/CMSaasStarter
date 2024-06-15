@@ -165,6 +165,47 @@
   }
 </script>
 
+<style global>
+  .bg-primary {
+    background-color: var(--primary);
+  }
+
+  .text-white {
+    color: white;
+  }
+
+  .hover\:bg-base-300:hover {
+    background-color: var(--base-300);
+  }
+
+  .block {
+    display: block;
+  }
+
+  .py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .rounded {
+    border-radius: 0.25rem;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .text-left {
+    text-align: left;
+  }
+</style>
+
+
 <svelte:head>
   <title>Assistants</title>
 </svelte:head>
