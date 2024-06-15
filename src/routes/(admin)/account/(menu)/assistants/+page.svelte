@@ -15,6 +15,11 @@
   let { supabase } = data;
 
   onMount(async () => {
+    if (!data.profile || !data.profile.id) {
+      console.error('User profile ID is not available');
+      return;
+    }
+
     const { data: assistantsData, error } = await supabase.from('assistants').select('id, assistant_name').eq('user_id', data.profile.id);
     if (error) {
       console.error('Error fetching assistants:', error);
@@ -82,6 +87,11 @@
   }
 
   async function createAssistant() {
+    if (!data.profile || !data.profile.id) {
+      console.error('User profile ID is not available');
+      return;
+    }
+
     const newAssistant = {
       assistant_name: 'New Assistant',
       system_prompt: '',
