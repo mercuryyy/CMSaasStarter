@@ -47,6 +47,7 @@
   }
 
   function updateModelOptions(provider) {
+    console.log('Updating model options for provider:', provider);
     switch(provider) {
       case 'OpenAI':
         modelOptions = ["gpt-4o", "gpt-3.5"];
@@ -66,13 +67,20 @@
   }
 
   async function publishAssistant() {
+    console.log('Publishing assistant:', selectedAssistant);
+
     if (!data.profile || !data.profile.id) {
       console.error('User profile ID is not available');
       return;
     }
 
-    if (!selectedAssistant || !selectedAssistant.model) {
+    if (!selectedAssistant) {
       console.error('Selected assistant is not properly initialized');
+      return;
+    }
+
+    if (!selectedAssistant.model) {
+      console.error('Selected assistant model is not properly initialized');
       return;
     }
 
@@ -96,14 +104,15 @@
       if (error) {
         console.error('Error creating assistant:', error);
       } else {
+        console.log('Assistant created successfully:', createdAssistant);
         selectedAssistant = createdAssistant;
         updateModelOptions(createdAssistant.model);
         await loadAssistants();
-        selectAssistant(createdAssistant);
+        await selectAssistant(createdAssistant);
       }
     } else {
       // Existing assistant update
-      console.log('Publishing assistant with the following data:', selectedAssistant);
+      console.log('Updating assistant with the following data:', selectedAssistant);
 
       const { data: updatedData, error } = await supabase
         .from('assistants')
@@ -124,9 +133,9 @@
       if (error) {
         console.error('Error updating assistant:', error);
       } else {
-        console.log('Assistant updated successfully', updatedData);
+        console.log('Assistant updated successfully:', updatedData);
         await loadAssistants();
-        selectAssistant(updatedData);
+        await selectAssistant(updatedData);
       }
     }
   }
