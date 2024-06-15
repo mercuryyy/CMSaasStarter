@@ -9,16 +9,19 @@ export const load = async ({ locals }) => {
   }
 
   console.log('Fetching assistants from database...');
-  const { data: assistants, error, status, count } = await supabase.from("assistants").select("*");
+  const { data: assistants, error, status, count } = await supabase
+    .from("assistants")
+    .select("*")
+    .eq("user_id", session.user.id); // Match user_id with the logged-in user id
 
   if (error) {
     console.error('Error fetching assistants:', error.message);
     return { assistants: [] };
   }
 
-  console.log('Response status:', status);
-  console.log('Count of records fetched:', count);
-  console.log('Fetched assistants:', assistants);
+  // console.log('Response status:', status);
+  // console.log('Count of records fetched:', count);
+  // console.log('Fetched assistants:', assistants);
 
   return { assistants: assistants || [] };
 };
