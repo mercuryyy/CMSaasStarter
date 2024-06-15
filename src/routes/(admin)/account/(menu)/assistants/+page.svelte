@@ -20,10 +20,10 @@
       return;
     }
 
-    await loadAssistants();
+    await loadAssistantNames();
   });
 
-  async function loadAssistants() {
+  async function loadAssistantNames() {
     const { data: assistantsData, error } = await supabase.from('assistants').select('id, assistant_name').eq('user_id', data.profile.id);
     if (error) {
       console.error('Error fetching assistants:', error);
@@ -35,12 +35,12 @@
     }
   }
 
-  async function selectAssistant(assistant) {
-    if (!assistant || !assistant.id) {
-      console.error('Invalid assistant data:', assistant);
+  async function loadAssistantDetails(assistantId) {
+    if (!assistantId) {
+      console.error('Invalid assistant ID:', assistantId);
       return;
     }
-    const { data: assistantData, error } = await supabase.from('assistants').select('*').eq('id', assistant.id).single();
+    const { data: assistantData, error } = await supabase.from('assistants').select('*').eq('id', assistantId).single();
     if (error) {
       console.error('Error fetching assistant details:', error);
     } else {
@@ -48,6 +48,10 @@
       selectedTab = 'model';
       updateModelOptions(selectedAssistant.model);
     }
+  }
+
+  async function selectAssistant(assistant) {
+    await loadAssistantDetails(assistant.id);
   }
 
   function updateModelOptions(provider) {
@@ -85,9 +89,9 @@
       return;
     }
 
-    let currentAssistant = null;
+    let currentAssistantId = selectedAssistant.id;
 
-    if (!selectedAssistant.id) {
+    if (!currentAssistantId) {
       // New assistant creation
       const newAssistant = {
         assistant_name: selectedAssistant.assistant_name,
@@ -107,15 +111,13 @@
       if (error) {
         console.error('Error creating assistant:', error);
       } else {
-        console.log('Assistant created successfully:', createdAssistant);
-        currentAssistant = createdAssistant;
-        assistants.push(createdAssistant);
+        currentAssistantId = createdAssistant.id;
       }
     } else {
       // Existing assistant update
       console.log('Updating assistant with the following data:', selectedAssistant);
 
-      const { data: updatedData, error } = await supabase
+      const { error } = await supabase
         .from('assistants')
         .update({
           assistant_name: selectedAssistant.assistant_name,
@@ -129,24 +131,15 @@
           model_name: selectedAssistant.model_name,
           app_number: selectedAssistant.app_number
         })
-        .eq('id', selectedAssistant.id)
-        .single();
+        .eq('id', currentAssistantId);
 
       if (error) {
         console.error('Error updating assistant:', error);
-      } else {
-        console.log('Assistant updated successfully:', updatedData);
-        currentAssistant = updatedData;
-        const index = assistants.findIndex(assistant => assistant.id === updatedData.id);
-        if (index !== -1) {
-          assistants[index] = updatedData;
-        }
       }
     }
 
-    if (currentAssistant) {
-      await selectAssistant(currentAssistant);
-    }
+    await loadAssistantNames();
+    await loadAssistantDetails(currentAssistantId);
   }
 
   function createAssistant() {
