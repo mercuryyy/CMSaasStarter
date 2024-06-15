@@ -9,6 +9,9 @@
   export let data;
   let { assistants } = data;
 
+  console.log('Data received from server:', data);
+  console.log('Assistants:', assistants);
+
   let selectedAssistant = assistants.length > 0 ? assistants[0] : null;
   let selectedTab = 'model';
 
