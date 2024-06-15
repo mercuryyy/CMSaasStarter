@@ -2,6 +2,12 @@
   import { onMount } from 'svelte';
   import { getContext } from "svelte";
   import type { Writable } from "svelte/store";
+  import { createClient, type Provider } from "@supabase/supabase-js";
+
+  // Initialize Supabase client (this assumes you have the URL and key stored in environment variables or a global config)
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+  const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
   let adminSection: Writable<string> = getContext("adminSection");
   adminSection.set("assistants");
