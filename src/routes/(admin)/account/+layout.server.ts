@@ -1,20 +1,19 @@
-import { redirect } from "@sveltejs/kit"
-import type { LayoutServerLoad } from "./$types"
+// src/routes/(admin)/account/+layout.server.ts
+import { redirect } from "@sveltejs/kit";
+import type { LayoutServerLoad } from "./$types";
 
-export const load: LayoutServerLoad = async ({
-  locals: { supabase, safeGetSession },
-}) => {
-  const { session } = await safeGetSession()
+export const load: LayoutServerLoad = async ({ locals }) => {
+  const { session } = await locals.safeGetSession();
 
   if (!session) {
-    redirect(303, "/login")
+    throw redirect(303, "/login");
   }
 
-  const { data: profile } = await supabase
+  const { data: profile } = await locals.supabase
     .from("profiles")
-    .select(`*`)
+    .select("*")
     .eq("id", session.user.id)
-    .single()
+    .single();
 
-  return { session, profile }
-}
+  return { session, profile, supabase: locals.supabase };
+};
