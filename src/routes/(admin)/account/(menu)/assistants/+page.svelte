@@ -219,7 +219,6 @@
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 3</div>
 </div>
 <br><br><br>
-
 <div role="tablist" class="tabs tabs-lg tabs-lifted">
   <input type="radio" name="my_tabs_2" id="tab1" role="tab" class="hidden" checked />
   <label for="tab1" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
