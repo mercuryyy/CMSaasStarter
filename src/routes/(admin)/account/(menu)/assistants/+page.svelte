@@ -204,44 +204,45 @@
         </div>
 
         <!-- Tabs -->
-        <div class="tabs flex space-x-4">
-          <a class="tab tab-lifted {selectedTab === 'model' ? 'tab-active bg-primary text-white' : 'bg-transparent text-gray-400'}" on:click={() => selectedTab = 'model'}>
+        <div class="tabs flex space-x-4 border-b border-gray-600 pb-2">
+          <a class="tab tab-lifted {selectedTab === 'model' ? 'tab-active bg-primary text-white rounded-t-lg' : 'bg-transparent text-gray-400'} px-4 py-2" on:click={() => selectedTab = 'model'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2-2m0 0l2-2m-2 2l2 2m-2-2v6" />
             </svg>
             Model
           </a>
-          <a class="tab tab-lifted {selectedTab === 'transcriber' ? 'tab-active bg-primary text-white' : 'bg-transparent text-gray-400'}" on:click={() => selectedTab = 'transcriber'}>
+          <a class="tab tab-lifted {selectedTab === 'transcriber' ? 'tab-active bg-primary text-white rounded-t-lg' : 'bg-transparent text-gray-400'} px-4 py-2" on:click={() => selectedTab = 'transcriber'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l7-7m0 0l7 7m-7-7v18" />
             </svg>
             Transcriber
           </a>
-          <a class="tab tab-lifted {selectedTab === 'voice' ? 'tab-active bg-primary text-white' : 'bg-transparent text-gray-400'}" on:click={() => selectedTab = 'voice'}>
+          <a class="tab tab-lifted {selectedTab === 'voice' ? 'tab-active bg-primary text-white rounded-t-lg' : 'bg-transparent text-gray-400'} px-4 py-2" on:click={() => selectedTab = 'voice'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6a3 3 0 013-3h0a3 3 0 013 3v13a3 3 0 11-6 0z" />
             </svg>
             Voice
           </a>
-          <a class="tab tab-lifted {selectedTab === 'functions' ? 'tab-active bg-primary text-white' : 'bg-transparent text-gray-400'}" on:click={() => selectedTab = 'functions'}>
+          <a class="tab tab-lifted {selectedTab === 'functions' ? 'tab-active bg-primary text-white rounded-t-lg' : 'bg-transparent text-gray-400'} px-4 py-2" on:click={() => selectedTab = 'functions'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
             Functions
           </a>
-          <a class="tab tab-lifted {selectedTab === 'advanced' ? 'tab-active bg-primary text-white' : 'bg-transparent text-gray-400'}" on:click={() => selectedTab = 'advanced'}>
+          <a class="tab tab-lifted {selectedTab === 'advanced' ? 'tab-active bg-primary text-white rounded-t-lg' : 'bg-transparent text-gray-400'} px-4 py-2" on:click={() => selectedTab = 'advanced'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
             </svg>
             Advanced
           </a>
-          <a class="tab tab-lifted {selectedTab === 'analysis' ? 'tab-active bg-primary text-white' : 'bg-transparent text-gray-400'}" on:click={() => selectedTab = 'analysis'}>
+          <a class="tab tab-lifted {selectedTab === 'analysis' ? 'tab-active bg-primary text-white rounded-t-lg' : 'bg-transparent text-gray-400'} px-4 py-2" on:click={() => selectedTab = 'analysis'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 12a4 4 0 114-4h1m2 0a4 4 0 11-4 4m0 4v6m0 0H8m4 0h4" />
             </svg>
             Analysis
           </a>
         </div>
+
 
 
         <!-- Tab Contents -->
@@ -258,7 +259,7 @@
                 </div>
                 <div class="mb-6">
                   <label class="block font-bold mb-2">System Prompt</label>
-                  <textarea class="w-full p-2 border rounded h-32" bind:value={selectedAssistant.system_prompt}></textarea>
+                  <textarea class="w-full p-2 border rounded h-64" bind:value={selectedAssistant.system_prompt}></textarea>
                 </div>
                 <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
