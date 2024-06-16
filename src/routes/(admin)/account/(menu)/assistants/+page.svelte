@@ -230,7 +230,7 @@
                 </div>
                 <div class="mb-4">
                   <label class="block font-bold mb-2">System Prompt</label>
-                  <textarea class="w-full p-2 border rounded" bind:value={selectedAssistant.system_prompt}></textarea>
+                  <textarea class="w-full p-2 border rounded h-32" bind:value={selectedAssistant.system_prompt}></textarea>
                 </div>
                 <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
