@@ -206,7 +206,10 @@
 
 
 
-<div role="tablist" class="tabs tabs-lg tabs-lifted flex">
+
+
+
+<div role="tablist" class="tabs tabs-lg tabs-lifted">
   <input type="radio" name="my_tabs_2" id="tab1" role="tab" class="hidden" checked />
   <label for="tab1" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,6 +217,7 @@
     </svg>
     <span>Model</span>
   </label>
+  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 1</div>
 
   <input type="radio" name="my_tabs_2" id="tab2" role="tab" class="hidden" />
   <label for="tab2" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
@@ -222,6 +226,7 @@
     </svg>
     <span>Transcriber</span>
   </label>
+  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 2</div>
 
   <input type="radio" name="my_tabs_2" id="tab3" role="tab" class="hidden" />
   <label for="tab3" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
@@ -230,6 +235,7 @@
     </svg>
     <span>Voice</span>
   </label>
+  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 3</div>
 
   <input type="radio" name="my_tabs_2" id="tab4" role="tab" class="hidden" />
   <label for="tab4" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
@@ -238,6 +244,7 @@
     </svg>
     <span>Functions</span>
   </label>
+  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 4</div>
 
   <input type="radio" name="my_tabs_2" id="tab5" role="tab" class="hidden" />
   <label for="tab5" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
@@ -246,6 +253,7 @@
     </svg>
     <span>Advanced</span>
   </label>
+  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 5</div>
 
   <input type="radio" name="my_tabs_2" id="tab6" role="tab" class="hidden" />
   <label for="tab6" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
@@ -254,16 +262,7 @@
     </svg>
     <span>Analysis</span>
   </label>
-</div>
-
-<div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-  Tab content 1
-</div>
-<div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-  Tab content 2
-</div>
-<div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
-  Tab content 3
+  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 6</div>
 </div>
 
 
