@@ -205,13 +205,44 @@
 
         <!-- Tabs -->
         <div class="tabs">
-          <a class="tab tab-lifted {selectedTab === 'model' ? 'tab-active' : ''}" on:click={() => selectedTab = 'model'}>Model</a>
-          <a class="tab tab-lifted {selectedTab === 'transcriber' ? 'tab-active' : ''}" on:click={() => selectedTab = 'transcriber'}>Transcriber</a>
-          <a class="tab tab-lifted {selectedTab === 'voice' ? 'tab-active' : ''}" on:click={() => selectedTab = 'voice'}>Voice</a>
-          <a class="tab tab-lifted {selectedTab === 'functions' ? 'tab-active' : ''}" on:click={() => selectedTab = 'functions'}>Functions</a>
-          <a class="tab tab-lifted {selectedTab === 'advanced' ? 'tab-active' : ''}" on:click={() => selectedTab = 'advanced'}>Advanced</a>
-          <a class="tab tab-lifted {selectedTab === 'analysis' ? 'tab-active' : ''}" on:click={() => selectedTab = 'analysis'}>Analysis</a>
+          <a class="tab tab-lifted {selectedTab === 'model' ? 'tab-active bg-primary text-white' : 'bg-base-200 text-gray-600'}" on:click={() => selectedTab = 'model'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m4 4V1m4 6V5m-2 8v-1m-4 4v-1m-4 4v-3m-4 4v-1m8-4H5a2 2 0 00-2 2v4m18-4a2 2 0 00-2-2h-3M4 8l4-4 4 4m4-4l4 4M4 8v8m8-8v8m4-8v8m0 0H4" />
+            </svg>
+            Model
+          </a>
+          <a class="tab tab-lifted {selectedTab === 'transcriber' ? 'tab-active bg-primary text-white' : 'bg-base-200 text-gray-600'}" on:click={() => selectedTab = 'transcriber'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+            Transcriber
+          </a>
+          <a class="tab tab-lifted {selectedTab === 'voice' ? 'tab-active bg-primary text-white' : 'bg-base-200 text-gray-600'}" on:click={() => selectedTab = 'voice'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6a3 3 0 013-3h0a3 3 0 013 3v13a3 3 0 11-6 0z" />
+            </svg>
+            Voice
+          </a>
+          <a class="tab tab-lifted {selectedTab === 'functions' ? 'tab-active bg-primary text-white' : 'bg-base-200 text-gray-600'}" on:click={() => selectedTab = 'functions'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+            Functions
+          </a>
+          <a class="tab tab-lifted {selectedTab === 'advanced' ? 'tab-active bg-primary text-white' : 'bg-base-200 text-gray-600'}" on:click={() => selectedTab = 'advanced'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+            </svg>
+            Advanced
+          </a>
+          <a class="tab tab-lifted {selectedTab === 'analysis' ? 'tab-active bg-primary text-white' : 'bg-base-200 text-gray-600'}" on:click={() => selectedTab = 'analysis'}>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 12a4 4 0 114-4h1m2 0a4 4 0 11-4 4m0 4v6m0 0H8m4 0h4" />
+            </svg>
+            Analysis
+          </a>
         </div>
+
 
         <!-- Tab Contents -->
         <div class="mt-4">
