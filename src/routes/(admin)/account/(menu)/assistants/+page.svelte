@@ -221,15 +221,15 @@
             <div id="model" class="tab-content">
               <h2 class="text-xl font-bold mb-4">Model</h2>
               <div class="bg-base-100 p-4 rounded shadow-md">
-                <div class="mb-4">
+                <div class="mb-6">
                   <label class="block font-bold mb-2">First Message</label>
                   <input class="w-full p-2 border rounded" bind:value={selectedAssistant.first_message} />
                 </div>
-                <div class="mb-4">
+                <div class="mb-6">
                   <label class="block font-bold mb-2">System Prompt</label>
                   <textarea class="w-full p-2 border rounded h-32" bind:value={selectedAssistant.system_prompt}></textarea>
                 </div>
-                <div class="mb-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label class="block font-bold mb-2">Provider</label>
                     <select class="w-full p-2 border rounded" bind:value={selectedAssistant.model} on:change={() => updateModelOptions(selectedAssistant.model)}>
@@ -247,16 +247,16 @@
                     </select>
                   </div>
                 </div>
-                <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4 items-center justify-center text-center">
                   <div>
-                    <label class="block font-bold mb-2">Temperature <span class="text-gray-700">{selectedAssistant.temperature}</span></label>
+                    <label class="block font-bold mb-2">Temperature <span class="text-gray-700">{selectedAssistant.temperature || 0.7}</span></label>
                     <input type="range" min="0" max="1" step="0.1" bind:value={selectedAssistant.temperature} class="slider w-full" />
                   </div>
                   <div>
                     <label class="block font-bold mb-2">Max Tokens</label>
                     <input type="number" min="1" max="5000" bind:value={selectedAssistant.max_tokens} class="w-full p-2 border rounded" />
                   </div>
-                  <div class="flex items-center mt-0">
+                  <div class="flex items-center justify-center mt-0">
                     <input type="checkbox" bind:checked={selectedAssistant.detect_emotion} class="form-checkbox h-5 w-5 text-gray-600 mr-2" />
                     <label class="font-bold">Detect Emotion</label>
                   </div>
@@ -264,7 +264,6 @@
               </div>
             </div>
           {/if}
-
 
 
           {#if selectedTab === 'transcriber'}
