@@ -262,7 +262,6 @@
                     <label class="font-bold">Detect Emotion</label>
                   </div>
                 </div>
-                <button class="btn btn-primary mt-4" on:click={publishAssistant}>Publish</button>
               </div>
             </div>
           {/if}
