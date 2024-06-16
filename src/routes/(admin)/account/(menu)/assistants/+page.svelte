@@ -204,38 +204,38 @@
         </div>
 
         <!-- Tabs -->
-        <div class="tabs flex space-x-4 border-b border-gray-600">
-          <a class="tab tab-lifted {selectedTab === 'model' ? 'tab-active bg-primary text-white rounded-t-lg border border-gray-600' : 'bg-transparent text-gray-600 hover:text-gray-800'} px-4 py-2" on:click={() => selectedTab = 'model'}>
+        <div class="tabs flex space-x-4 border-b border-gray-200">
+          <a class="tab {selectedTab === 'model' ? 'bg-primary text-white rounded-t-lg border border-gray-200' : 'text-gray-600'} px-4 py-2" on:click={() => selectedTab = 'model'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2-2m0 0l2-2m-2 2l2 2m-2-2v6" />
             </svg>
             Model
           </a>
-          <a class="tab tab-lifted {selectedTab === 'transcriber' ? 'tab-active bg-primary text-white rounded-t-lg border border-gray-600' : 'bg-transparent text-gray-600 hover:text-gray-800'} px-4 py-2" on:click={() => selectedTab = 'transcriber'}>
+          <a class="tab {selectedTab === 'transcriber' ? 'bg-primary text-white rounded-t-lg border border-gray-200' : 'text-gray-600'} px-4 py-2" on:click={() => selectedTab = 'transcriber'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11l7-7m0 0l7 7m-7-7v18" />
             </svg>
             Transcriber
           </a>
-          <a class="tab tab-lifted {selectedTab === 'voice' ? 'tab-active bg-primary text-white rounded-t-lg border border-gray-600' : 'bg-transparent text-gray-600 hover:text-gray-800'} px-4 py-2" on:click={() => selectedTab = 'voice'}>
+          <a class="tab {selectedTab === 'voice' ? 'bg-primary text-white rounded-t-lg border border-gray-200' : 'text-gray-600'} px-4 py-2" on:click={() => selectedTab = 'voice'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6a3 3 0 013-3h0a3 3 0 013 3v13a3 3 0 11-6 0z" />
             </svg>
             Voice
           </a>
-          <a class="tab tab-lifted {selectedTab === 'functions' ? 'tab-active bg-primary text-white rounded-t-lg border border-gray-600' : 'bg-transparent text-gray-600 hover:text-gray-800'} px-4 py-2" on:click={() => selectedTab = 'functions'}>
+          <a class="tab {selectedTab === 'functions' ? 'bg-primary text-white rounded-t-lg border border-gray-200' : 'text-gray-600'} px-4 py-2" on:click={() => selectedTab = 'functions'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
             Functions
           </a>
-          <a class="tab tab-lifted {selectedTab === 'advanced' ? 'tab-active bg-primary text-white rounded-t-lg border border-gray-600' : 'bg-transparent text-gray-600 hover:text-gray-800'} px-4 py-2" on:click={() => selectedTab = 'advanced'}>
+          <a class="tab {selectedTab === 'advanced' ? 'bg-primary text-white rounded-t-lg border border-gray-200' : 'text-gray-600'} px-4 py-2" on:click={() => selectedTab = 'advanced'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
             </svg>
             Advanced
           </a>
-          <a class="tab tab-lifted {selectedTab === 'analysis' ? 'tab-active bg-primary text-white rounded-t-lg border border-gray-600' : 'bg-transparent text-gray-600 hover:text-gray-800'} px-4 py-2" on:click={() => selectedTab = 'analysis'}>
+          <a class="tab {selectedTab === 'analysis' ? 'bg-primary text-white rounded-t-lg border border-gray-200' : 'text-gray-600'} px-4 py-2" on:click={() => selectedTab = 'analysis'}>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 12a4 4 0 114-4h1m2 0a4 4 0 11-4 4m0 4v6m0 0H8m4 0h4" />
             </svg>
