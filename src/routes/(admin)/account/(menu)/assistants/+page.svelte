@@ -209,29 +209,17 @@
 
 <br><br><br>
 <div role="tablist" class="tabs tabs-lifted">
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 1" />
-  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 1</div>
-
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 2" checked />
-  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 2</div>
-
-  <input type="radio" name="my_tabs_2" role="tab" class="tab" aria-label="Tab 3" />
-  <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 3</div>
-</div>
-<br><br><br>
-
-<div role="tablist" class="tabs tabs-lg tabs-lifted">
   <input type="radio" name="my_tabs_2" id="tab1" role="tab" class="hidden" />
-  <label for="tab1" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border border-transparent">
+  <label for="tab1" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border" aria-label="Tab 1">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v2m0-10v2m-3.79 2.21l1.42 1.42M19.07 9.07l-1.41 1.42M4.93 14.93l1.41-1.41M14.5 11.5l2.12-2.12M10.5 11.5L8.38 9.38M16 12h-1.5m-1 1.5H14m2.5 0H17M7 12h1.5m-1-1.5H7m2.5 0H9m0 3H7m2.5 0H9m0-1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v2m0-10v2m-3.79 2.21l1.42 1.42M19.07 9.07l-1.41 1.42M4.93 14.93l1.41-1.41M14.5 11.5l2.12-2.12M10.5 11.5L8.38 9.38M16 12h-1.5m-1 1.5H14m2.5 0H17M7 12h1.5m-1-1.5H7m2.5 0H9m0 3H7m2.5 0H9m0-1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9" />
     </svg>
     <span>Model</span>
   </label>
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 1</div>
 
   <input type="radio" name="my_tabs_2" id="tab2" role="tab" class="hidden" checked />
-  <label for="tab2" class="tab active-tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border border-gray-300">
+  <label for="tab2" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border active-tab" aria-label="Tab 2">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6M9 16h6M5 8h14M5 12h1M5 16h1" />
     </svg>
@@ -240,7 +228,7 @@
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 2</div>
 
   <input type="radio" name="my_tabs_2" id="tab3" role="tab" class="hidden" />
-  <label for="tab3" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border border-transparent">
+  <label for="tab3" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border" aria-label="Tab 3">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-7-9-7-9 7 9 7zm0 0v7m0-7l3 2 3-2m-6 0L9 22l-3-2" />
     </svg>
@@ -249,7 +237,7 @@
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 3</div>
 
   <input type="radio" name="my_tabs_2" id="tab4" role="tab" class="hidden" />
-  <label for="tab4" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border border-transparent">
+  <label for="tab4" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border" aria-label="Tab 4">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6v-3h3L12 3 6 10h3v3zM3 21h18v-3H3v3z" />
     </svg>
@@ -258,7 +246,7 @@
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 4</div>
 
   <input type="radio" name="my_tabs_2" id="tab5" role="tab" class="hidden" />
-  <label for="tab5" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border border-transparent">
+  <label for="tab5" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border" aria-label="Tab 5">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 3h4v2h-4V3zM3 7h4v4H3V7zM3 13h4v4H3v-4zM7 7h4v4H7V7zM7 13h4v4H7v-4zM11 7h4v4h-4V7zM11 13h4v4h-4v-4zM15 7h4v4h-4V7zM15 13h4v4h-4v-4zM10 17h4v2h-4v-2z" />
     </svg>
@@ -267,7 +255,7 @@
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 5</div>
 
   <input type="radio" name="my_tabs_2" id="tab6" role="tab" class="hidden" />
-  <label for="tab6" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border border-transparent">
+  <label for="tab6" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg border" aria-label="Tab 6">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-7-9-7-9 7 9 7zm0 0v7m0-7l3 2 3-2m-6 0L9 22l-3-2" />
     </svg>
@@ -438,5 +426,8 @@
   .tab.tab-active {
     border-bottom: 2px solid currentColor;
   }
+input[name="my_tabs_2"]:checked + label {
+  @apply bg-white border-gray-300 text-black;
+}
 </style>
 
