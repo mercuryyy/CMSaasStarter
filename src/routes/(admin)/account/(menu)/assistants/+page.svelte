@@ -217,8 +217,6 @@
         <div class="mt-4">
 
 
-
-
           
           {#if selectedTab === 'model'}
             <div id="model" class="tab-content">
@@ -252,7 +250,7 @@
                 </div>
                 <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <label class="block font-bold mb-2">Temperature</label>
+                    <label class="block font-bold mb-2">Temperature <span class="text-gray-700">{selectedAssistant.temperature}</span></label>
                     <input type="range" min="0" max="1" step="0.1" bind:value={selectedAssistant.temperature} class="slider" />
                   </div>
                   <div>
@@ -264,9 +262,11 @@
                     <label class="font-bold">Detect Emotion</label>
                   </div>
                 </div>
+                <button class="btn btn-primary mt-4" on:click={publishAssistant}>Publish</button>
               </div>
             </div>
           {/if}
+
 
 
           {#if selectedTab === 'transcriber'}
