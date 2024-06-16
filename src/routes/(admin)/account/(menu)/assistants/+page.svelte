@@ -203,6 +203,13 @@
           </div>
         </div>
 
+
+<div role="tablist" class="tabs">
+  <a role="tab" class="tab">Tab 1</a>
+  <a role="tab" class="tab tab-active">Tab 2</a>
+  <a role="tab" class="tab">Tab 3</a>
+</div>
+
         <!-- Tabs -->
         <div class="tabs flex space-x-4 border-b border-gray-600">
           <a class="tab px-4 py-2 rounded-t-md border border-gray-600 {selectedTab === 'model' ? 'bg-primary text-white' : 'text-gray-600'}" on:click={() => selectedTab = 'model'}>
