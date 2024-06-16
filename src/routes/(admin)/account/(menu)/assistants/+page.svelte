@@ -203,6 +203,9 @@
           </div>
         </div>
 
+
+
+<br><br><br>
         <!-- Tabs -->
         <div class="tabs flex space-x-4 border-b border-gray-600 p-2.5 bg-base-200 rounded-lg">
           <a class="tab px-4 py-2 rounded-t-md border border-gray-600 {selectedTab === 'model' ? 'bg-primary text-white' : 'text-gray-600'}" on:click={() => selectedTab = 'model'}>
@@ -243,8 +246,13 @@
           </a>
         </div>
 
+
+
+
         <!-- Tab Contents -->
         <div class="mt-4">
+
+          
           {#if selectedTab === 'model'}
             <div id="model" class="tab-content">
               <h2 class="text-xl font-bold mb-4">Model</h2>
@@ -293,6 +301,7 @@
             </div>
           {/if}
 
+
           {#if selectedTab === 'transcriber'}
             <div id="transcriber" class="tab-content">
               <h2 class="text-xl font-bold mb-4">Transcriber</h2>
@@ -338,14 +347,13 @@
             </div>
           {/if}
         </div>
-        <button class="btn btn-primary mt-4" on:click={publishAssistant}>Publish</button>
+                <button class="btn btn-primary mt-4" on:click={publishAssistant}>Publish</button>
       </div>
     {:else}
       <p>Loading assistants...</p>
     {/if}
   </div>
 </div>
-
 <style>
   .tab-content:not(.hidden) {
     display: block;
@@ -358,49 +366,5 @@
   .tab.tab-active {
     border-bottom: 2px solid currentColor;
   }
-
-  .tab {
-    transition: background-color 0.3s, color 0.3s;
-  }
-
-  .tab:hover {
-    background-color: #e5e7eb; /* Light gray */
-    color: #1f2937; /* Darker gray */
-  }
-
-  .tab-active {
-    background-color: #1f2937; /* Dark gray */
-    color: #ffffff; /* White */
-  }
-
-  .slider {
-    appearance: none;
-    width: 100%;
-    height: 8px;
-    background: #d1d5db; /* Light gray */
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-  }
-
-  .slider:hover {
-    opacity: 1;
-  }
-
-  .slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 25px;
-    height: 25px;
-    background: #4b5563; /* Dark gray */
-    cursor: pointer;
-    border-radius: 50%;
-  }
-
-  .slider::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #4b5563; /* Dark gray */
-    cursor: pointer;
-    border-radius: 50%;
-  }
 </style>
+
