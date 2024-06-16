@@ -216,7 +216,6 @@
         <!-- Tab Contents -->
         <div class="mt-4">
 
-
           
           {#if selectedTab === 'model'}
             <div id="model" class="tab-content">
@@ -248,16 +247,16 @@
                     </select>
                   </div>
                 </div>
-                <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="mb-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
                   <div>
                     <label class="block font-bold mb-2">Temperature <span class="text-gray-700">{selectedAssistant.temperature}</span></label>
-                    <input type="range" min="0" max="1" step="0.1" bind:value={selectedAssistant.temperature} class="slider" />
+                    <input type="range" min="0" max="1" step="0.1" bind:value={selectedAssistant.temperature} class="slider w-full" />
                   </div>
                   <div>
                     <label class="block font-bold mb-2">Max Tokens</label>
                     <input type="number" min="1" max="5000" bind:value={selectedAssistant.max_tokens} class="w-full p-2 border rounded" />
                   </div>
-                  <div class="flex items-center mt-6">
+                  <div class="flex items-center mt-0">
                     <input type="checkbox" bind:checked={selectedAssistant.detect_emotion} class="form-checkbox h-5 w-5 text-gray-600 mr-2" />
                     <label class="font-bold">Detect Emotion</label>
                   </div>
