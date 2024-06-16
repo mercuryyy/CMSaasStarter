@@ -219,11 +219,13 @@
   <div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">Tab content 3</div>
 </div>
 <br><br><br>
+
+
 <div role="tablist" class="tabs tabs-lg tabs-lifted">
   <input type="radio" name="my_tabs_2" id="tab1" role="tab" class="hidden" checked />
   <label for="tab1" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1v-1h3v5h1m0-7H9v1h1v1H9v1h3m4-1v1h-1v1h-2v1h2v2h1v1h1v-2h1v-2h-1v-1h-2V9z" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v2m0-10v2m-3.79 2.21l1.42 1.42M19.07 9.07l-1.41 1.42M4.93 14.93l1.41-1.41M14.5 11.5l2.12-2.12M10.5 11.5L8.38 9.38M16 12h-1.5m-1 1.5H14m2.5 0H17M7 12h1.5m-1-1.5H7m2.5 0H9m0 3H7m2.5 0H9m0-1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9" />
     </svg>
     <span>Model</span>
   </label>
@@ -241,7 +243,7 @@
   <input type="radio" name="my_tabs_2" id="tab3" role="tab" class="hidden" />
   <label for="tab3" class="tab cursor-pointer px-4 py-2 flex items-center space-x-2 text-gray-600 hover:text-white hover:bg-gray-700 rounded-t-lg">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v2m0-10v2m-3.79 2.21l1.42 1.42M19.07 9.07l-1.41 1.42M4.93 14.93l1.41-1.41M14.5 11.5l2.12-2.12M10.5 11.5L8.38 9.38M16 12h-1.5m-1 1.5H14m2.5 0H17M7 12h1.5m-1-1.5H7m2.5 0H9m0 3H7m2.5 0H9m0-1.5H7m2.5 0H9m0 1.5H7m2.5 0H9m0 1.5H7m2.5 0H9" />
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20l9-7-9-7-9 7 9 7zm0 0v7m0-7l3 2 3-2m-6 0L9 22l-3-2" />
     </svg>
     <span>Voice</span>
   </label>
